@@ -33,16 +33,11 @@ public class JpaConfiguration {
      * */
     private static final String AOP_POINTCUT_EXPRESSION="(execution(* com.dawn.application..*.*(..))) or (execution(* com.dawn.facade..*.*(..))) or (execution(* org.dayatang.domain.EntityRepository.*(..)))";
 
-    @Autowired
-    PlatformTransactionManager transactionManager;
-
-    @Autowired
-    EntityManager entityManager;
     /**
      *声明通知（定义事务切面？）
      */
     @Bean
-    public Advisor advisor(){
+    public Advisor advisor(PlatformTransactionManager transactionManager){
         AspectJExpressionPointcut pointcut = new AspectJExpressionPointcut();
         pointcut.setExpression(AOP_POINTCUT_EXPRESSION);
         DefaultPointcutAdvisor advisor= new DefaultPointcutAdvisor();
@@ -77,7 +72,7 @@ public class JpaConfiguration {
 
     /**初始化dddlib仓库*/
     @Bean("repository")
-    public EntityRepository entityRepository(){
+    public EntityRepository entityRepository(EntityManager entityManager){
         EntityRepositoryJpa entityRepositoryJpa = new EntityRepositoryJpa(entityManager);
         return entityRepositoryJpa;
     }
