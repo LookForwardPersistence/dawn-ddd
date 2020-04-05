@@ -1,0 +1,10 @@
+.idea
+dawn-application/target/**
+dawn-conf/target/**
+dawn-domain/target/**
+dawn-dubbo-provider/target/**
+dawn-facade/target/**
+dawn-facade-impl/target/**
+dawn-infra/target/**
+dawn-job/target/**
+dawn-web/target/**
